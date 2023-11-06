@@ -1,0 +1,18 @@
+.imagen{
+    width: 7rem;
+}
+
+.title{
+    width: 7rem;
+}
+
+
+.ul{
+    display: flex;
+    flex-direction: row;
+}
+
+.li{
+    width:100vw;
+    flex: 1 1 50%;
+}
