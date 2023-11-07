@@ -1,18 +1,44 @@
+.main{
+    width: 100%;
+}
+
 .imagen{
-    width: 7rem;
+    max-width: 7rem;
+    min-width: 7rem;
+    max-height: 8rem;
+    min-height: 8rem;
 }
 
 .title{
-    width: 7rem;
+    width: 8rem;
+    font-size: 0.8rem;
 }
 
 
 .ul{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    place-content: center;
+    gap: 1rem;
+    
 }
 
 .li{
-    width:100vw;
-    flex: 1 1 50%;
+    display: grid;
+    place-content: center;
+    margin: 1rem;
+    box-shadow: 0 4px 4px 4px rgb(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.texto{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contenedorImagen{
+    padding: 1rem;
+    margin-bottom: 1rem;
+
 }

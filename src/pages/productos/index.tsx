@@ -25,20 +25,25 @@ export default function Index() {
   }
   
   return (
-    <div >
+    <div className={css.main} >
       <Nav />
-      <ul className={css.ul} >
-        
+      <ul>
+        <div className={css.ul}>
+
         {productos.map((producto: Producto) => (
         
         <li className={css.li} key={producto.id}>
-        
+      
+            <div className={css.contenedorImagen}>
             <Image src={producto.image} alt='foto no disponible' width={400} height={400} className={css.imagen} />
-            <h2 className={css.title}>{producto.title}</h2>
-           <span className={css.price}>{producto.price}</span>
-        
+            </div>
+            <div className={css.texto}>
+              <h2 className={css.title}>{producto.title}</h2>
+              <span className={css.price}>{producto.price}</span>
+            </div>
           </li>
       ))}
+        </div>
       </ul>
     </div>
   )

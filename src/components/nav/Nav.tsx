@@ -10,7 +10,7 @@ export default function Nav() {
 
   return (
       <div>
-          <nav className='h-12 flex justify-end'>
+          <nav className='h-12 flex justify-end w-full'>
           {/*boton buscar*/}
           
           <button>
