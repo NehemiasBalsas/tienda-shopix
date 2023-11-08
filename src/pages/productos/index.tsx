@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image';
 import Nav from '@/components/nav/Nav';
 import css from '@/styles/productos.module.css'
+import Link from 'next/link';
 
 export default function Index() {
   const [productos, setProductos] = useState([])
@@ -12,40 +13,44 @@ export default function Index() {
       const datos = await res.json()
       setProductos(datos)
     }
-  
+
     llamarDatos()
   }, [])
-  
+
   type Producto = {
     id: number;
     title: string;
     price: number;
-    image: string
-    
+    image: string;
   }
-  
-  return (
-    <div className={css.main} >
-      <Nav />
-      <ul>
-        <div className={css.ul}>
 
+  return (
+    <>
+      <Nav />
+
+      <div className={css.gridcontainer}>
         {productos.map((producto: Producto) => (
-        
-        <li className={css.li} key={producto.id}>
-      
-            <div className={css.contenedorImagen}>
-            <Image src={producto.image} alt='foto no disponible' width={400} height={400} className={css.imagen} />
+          <article className={css.cardcontain} key={producto.id}>
+            <Image
+              src={producto.image}
+              alt={`Foto de ${producto.title}`}
+              width={200}
+              height={200}
+              layout='resposive'
+              className={css.imagedit}
+            />
+
+            <div className={css.textcontain}>
+              <h2 className={css.titulo}>{producto.title}</h2>
+              <p className={css.price}>$ {producto.price}</p>
+              <Link className={css.btn} href={`./productos/lista/${producto.id}`}>
+                Ver más
+              </Link>
             </div>
-            <div className={css.texto}>
-              <h2 className={css.title}>{producto.title}</h2>
-              <span className={css.price}>{producto.price}</span>
-            </div>
-          </li>
-      ))}
-        </div>
-      </ul>
-    </div>
+          </article>
+        ))}
+      </div>
+
+    </>
   )
 }
-
