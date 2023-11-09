@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Nav from '@/components/nav/Nav';
 import css from '@/styles/productos.module.css'
 import Link from 'next/link';
+import BotonCategory from '@/components/BotonCategory';
 
 export default function Index() {
   const [productos, setProductos] = useState([])
@@ -27,7 +28,7 @@ export default function Index() {
   return (
     <>
       <Nav />
-
+      <BotonCategory />
       <div className={css.gridcontainer}>
         {productos.map((producto: Producto) => (
           <article className={css.cardcontain} key={producto.id}>
