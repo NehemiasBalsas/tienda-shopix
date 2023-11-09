@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Card from '@/components/Card'
+import Inicio from "@/components/Inicio"
 import { Inter } from 'next/font/google'
 import Nav from '@/components/nav/Nav'
 
@@ -10,7 +10,7 @@ export default function Home() {
     <main>
 
       <Nav />
-      
+      <Inicio />
     </main>
   )
 }
