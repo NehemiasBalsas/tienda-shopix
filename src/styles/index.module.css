@@ -52,3 +52,23 @@
     height: auto;
     margin: 1rem 0;
 }
+@media screen and (min-width: 720px){
+    .textcontain h1{
+        font-size: 2.5rem;
+    }
+    .textcontain p{
+        font-size: 1.5rem;
+    }
+}
+@media screen and (min-width: 500px){
+    .flex{
+        display: flex;
+        gap: 1rem;
+    }
+    .imagecard{
+        flex: 1 1 50%;
+    }
+    .banner{
+        height: 300px;
+    }
+}

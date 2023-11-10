@@ -12,23 +12,25 @@ function Inicio() {
             <p>Encontra lo mejor al mejor precio!</p>
         </div>
         <BotonCategory />
-        <div className={style.imagecard}>
-            <Image src="/images/stylewoman.webp" alt='banner ropa'
-            width={100}
-            height={100}
-            layout='resposive'
-            className={style.banner}
-            />
-            <h2>Todo lo nuevo lo tenemos aca!</h2>
-        </div>
-        <div className={style.imagecard}>
-            <Image src="/images/stylemen.webp" alt='banner ropa'
-            width={100}
-            height={100}
-            layout='resposive'
-            className={style.banner}
-            />
-            <h2>Todo lo nuevo lo tenemos aca!</h2>
+        <div className={style.flex}>
+          <div className={style.imagecard}>
+              <Image src="/images/stylewoman.webp" alt='banner ropa'
+              width={100}
+              height={100}
+              layout='resposive'
+              className={style.banner}
+              />
+              <h2>Todo lo nuevo lo tenemos aca!</h2>
+          </div>
+          <div className={style.imagecard}>
+              <Image src="/images/stylemen.webp" alt='banner ropa'
+              width={100}
+              height={100}
+              layout='resposive'
+              className={style.banner}
+              />
+              <h2>Todo lo nuevo lo tenemos aca!</h2>
+          </div>
         </div>
         <h2 className={style.title}>Productos Gaming</h2>
         <p className={style.subtitle}>Contamos con una gran variedad de productos Gaming</p>
