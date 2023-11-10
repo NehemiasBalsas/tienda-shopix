@@ -1,37 +1,26 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Nav from '@/components/nav/Nav';
 import css from '@/styles/productos.module.css'
 import Link from 'next/link';
-import BotonCategory from '@/components/BotonCategory';
 
-export default function Index() {
-  const [productos, setProductos] = useState([])
 
-  useEffect(() => {
-    async function llamarDatos() {
-      const res = await fetch("https://fakestoreapi.com/products")
-      const datos = await res.json()
-      setProductos(datos)
-    }
+type Product ={
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  image: string;
+}
 
-    llamarDatos()
-  }, [])
-
-  type Producto = {
-    id: number;
-    title: string;
-    price: number;
-    image: string;
-  }
-
+export default function StorePage({ products }: {products:Product[]}) {
   return (
     <>
       <Nav />
-      <BotonCategory />
-      <div className={css.gridcontainer}>
-        {productos.map((producto: Producto) => (
-          <article className={css.cardcontain} key={producto.id}>
+        <div className={css.gridcontainer}>
+        {products.map((producto) => (
+             <article className={css.cardcontain} key={producto.id}>
             <Image
               src={producto.image}
               alt={`Foto de ${producto.title}`}
@@ -50,8 +39,20 @@ export default function Index() {
             </div>
           </article>
         ))}
-      </div>
-
+        </div>
     </>
   )
+  
+}
+
+
+export async function getServerSideProps(context: any) {
+  const res = await fetch("https://fakestoreapi.com/products")
+  const products = await res.json();
+  
+  return {
+    props: {
+      products,
+    }
+  }
 }
