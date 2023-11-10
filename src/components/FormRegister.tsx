@@ -25,7 +25,7 @@ function FormRegister() {
       console.log(datosAEnviar)
   
   
-      const respuesta = await fetch("http://localhost:3000/api/usuario/register", {
+      const respuesta = await fetch("http://localhost:3000/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"
@@ -48,7 +48,7 @@ function FormRegister() {
   return (
     <section className={style.container}>
         <h1 className={style.title}>Registrate</h1>
-        <form method='post' className={style.formcontain}>
+        <form method='post' className={style.formcontain} onSubmit={async (e) => await mandarDatosDeRegistro(e)}>
             {/* Form Group */}
             <div className={style.formgroup}>
                 <label htmlFor="fullname">
