@@ -12,7 +12,7 @@ function BotonCategory() {
   function mujer(){
     router.push(`/productos/category/${encodeURIComponent("women's clothing")}`)
   }
-  function lenceria(){
+  function joyeria(){
     router.push("/productos/category/jewelery")
   }
   function gaming(){
@@ -28,8 +28,8 @@ function BotonCategory() {
         <button onClick={mujer} className={style.boton}>
           Mujeres
         </button>
-          <button onClick={lenceria} className={style.boton}>
-            Lenceria
+          <button onClick={joyeria} className={style.boton}>
+            Joyería
           </button>
         <button onClick={gaming} className={style.boton}>
           Gaming

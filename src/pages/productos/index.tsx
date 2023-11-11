@@ -12,6 +12,7 @@ type Product ={
   category: string;
   price: number;
   image: string;
+  cantidad: 1;
 }
 
 export default function StorePage({ products }: {products:Product[]}) {

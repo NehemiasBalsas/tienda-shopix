@@ -13,6 +13,7 @@ interface Producto {
   category: string;
   price: number;
   image: string;
+  cantidad: 1;
 }
 
 const DetalleDelProducto: React.FC = () => {
@@ -42,8 +43,10 @@ const DetalleDelProducto: React.FC = () => {
     <>
       <Nav />
       <section className={style.container}>
+        <div className={style.containerImage}>
         <Image src={producto.image} alt={`Foto de ${producto.title}`} width={200} height={200} className={style.imageproduct} />
-        <section className={style.textcontain}>
+        </div>
+          <section className={style.textcontain}>
           <h1 className={style.titulo}>{producto.title}</h1>
           <h2 className={style.categoria}>{producto.category}</h2><span> ${ producto.price }</span>
           <p>{producto.description}</p>

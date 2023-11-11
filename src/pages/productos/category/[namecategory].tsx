@@ -57,7 +57,7 @@ function Category() {
             <div className={css.textcontain}>
               <h2 className={css.titulo}>{producto.title}</h2>
               <p className={css.price}>$ {producto.price}</p>
-              <Link className={css.btn} href={`./productos/lista/${producto.id}`}>
+              <Link className={css.btn} href={`../lista/${producto.id}`}>
                 Ver más
               </Link>
             </div>

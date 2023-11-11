@@ -6,18 +6,24 @@
 }
 
 .imageproduct{
-    width: 100%;
-    height: 300px;
+    width: 50%;
     object-fit: scale-down;
     object-position: center center;
+
 }
 
+.containerImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 .textcontain{
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    margin-top: .5rem;
 }
 .titulo{
     font-size: 1.3rem;
