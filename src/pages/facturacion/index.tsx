@@ -1,6 +1,7 @@
 import Nav from "@/components/nav/Nav";
 import style from "@/styles/facturacion.module.css";
 import React, { FormEvent, useRef } from "react";
+import mercadopago from "mercadopago";
 
 function DatosDeFacturacion() {
   const nombreRef = useRef<HTMLInputElement>(null);
