@@ -1,6 +1,6 @@
 import Nav from "@/components/nav/Nav";
 import style from "@/styles/facturacion.module.css";
-import React, { FormEvent, useRef } from "react";
+import React, { FormEvent, useRef, useEffect } from "react";
 import mercadopago from "mercadopago";
 
 function DatosDeFacturacion() {
@@ -15,9 +15,22 @@ function DatosDeFacturacion() {
   const emailRef = useRef<HTMLInputElement>(null);
   const telefonoRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const fetchCheckout = async () => {
+      const respuestamp = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+        })
+      })
+    }
+  })
+
   async function enviarDatosDeFacturacion(evento: FormEvent) {
     evento.preventDefault();
-
+    
     const datosAEnviar = {
       //@ts-ignore
       nombre: nombreRef.current?.value,
@@ -41,6 +54,9 @@ function DatosDeFacturacion() {
       telefono: telefonoRef.current?.value,
     };
     console.log(datosAEnviar)
+    
+    
+
 
     const respuesta = await fetch("http://localhost:3000/api/facturacion", {
       method: "POST",
