@@ -30,9 +30,10 @@ function FormRegister() {
       });
   
   
-      if(respuesta.status !== 201){
-        const error = await respuesta.json()
-        alert(error.msg)
+      if (!respuesta.ok) {
+        const errorHtml = await respuesta.text();
+        console.error(`Error en la solicitud: ${errorHtml}`);
+        return; 
       }
   
   
@@ -44,7 +45,7 @@ function FormRegister() {
   return (
     <section className={style.container}>
         <h1 className={style.title}>Registrate</h1>
-        <form method='post' className={style.formcontain} onSubmit={async (e) => await mandarDatosDeRegistro(e)}>
+        <form className={style.formcontain} onSubmit={async (e) => await mandarDatosDeRegistro(e)}>
             {/* Form Group */}
             <div className={style.formgroup}>
                 <label htmlFor="fullname">

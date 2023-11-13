@@ -46,7 +46,7 @@ function redirigir(){
   return (
     <section className={style.container}>
         <h1 className={style.title}>Iniciar Sesion</h1>
-        <form method='post' className={style.formcontain} onSubmit={ValidarDatos}>
+        <form className={style.formcontain} onSubmit={ValidarDatos}>
             {/* Form Group */}
             <div className={style.formgroup}>
                 <label htmlFor="email">
