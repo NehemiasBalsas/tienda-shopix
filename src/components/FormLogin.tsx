@@ -27,12 +27,12 @@ function redirigir(){
     console.log(datosRecibir)
 
 
-    const respuesta = await fetch("http://localhost:3000/api/usuario/login", {
+    const respuesta = await fetch("http://localhost:3000/api/usuarios/login", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify(datosRecibir)
+      body: JSON.stringify(ValidarDatos)
     });
     if(respuesta.status !== 201){
       const error = await respuesta.json()

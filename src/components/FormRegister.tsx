@@ -6,16 +6,12 @@ function FormRegister() {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const yearRef = useRef(null);
-  
     async function mandarDatosDeRegistro(evento: FormEvent) {
       evento.preventDefault()
   
       const datosAEnviar = {
         //@ts-ignore
       nombre: nameRef.current?.value, 
-      //@ts-ignore
-      edad: Number(yearRef.current?.value),
       //@ts-ignore
       email: emailRef.current?.value,
       //@ts-ignore
@@ -25,7 +21,7 @@ function FormRegister() {
       console.log(datosAEnviar)
   
   
-      const respuesta = await fetch("http://localhost:3000/api/auth/register", {
+      const respuesta = await fetch("http://localhost:3000/api/usurios/register", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"
