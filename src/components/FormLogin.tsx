@@ -32,7 +32,7 @@ function redirigir(){
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify(ValidarDatos)
+      body: JSON.stringify(datosRecibir)
     });
     if(respuesta.status !== 201){
       const error = await respuesta.json()
@@ -46,7 +46,7 @@ function redirigir(){
   return (
     <section className={style.container}>
         <h1 className={style.title}>Iniciar Sesion</h1>
-        <form method='post' className={style.formcontain}>
+        <form method='post' className={style.formcontain} onSubmit={ValidarDatos}>
             {/* Form Group */}
             <div className={style.formgroup}>
                 <label htmlFor="email">
