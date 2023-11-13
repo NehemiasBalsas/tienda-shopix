@@ -5,6 +5,7 @@ import search from '@/assets/img/search.png';
 import setting from '@/assets/img/setting.png';
 import carrito from '@/assets/img/shopping-cart (3).png';
 import Cart from '../Cart';
+import Hamburgesa from './Hambuesa';
 import Link from 'next/link';
 import css from '@/styles/productos.module.css';
 
@@ -19,8 +20,16 @@ export default function Nav() {
   const [cartOpen, setCartOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchVisible, setSearchVisible] = useState(false);
+  const [mostrarmenu, setMostrarmenu] = useState(false);
   const [searchResults, setSearchResults] = useState<Product[]>([]);
   const apiUrl = 'https://fakestoreapi.com/products';
+
+
+
+    const handleClick = () => {
+      setMostrarmenu(!mostrarmenu)
+    }
+  
 
   const handleCartToggle = () => {
     setCartOpen(!cartOpen);
@@ -62,9 +71,13 @@ export default function Nav() {
           <Image src={search} alt="foto no disponible" className={style.buscador} />
         </button>
 
-        <button>
-          <Image src={setting} alt="foto no disponible" className={style.menu} />
-        </button>
+        <div>
+      <button onClick={handleClick}>
+        <Image src={setting} alt="foto no disponible" className={style.menu} />
+      </button>
+
+      {mostrarmenu && <Hamburgesa />}
+    </div>
 
         <button onClick={handleCartToggle}>
           <Image src={carrito} alt="Cart Icon" className={style.carrito} />

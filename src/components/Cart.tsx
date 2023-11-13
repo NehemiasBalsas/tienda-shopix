@@ -87,10 +87,8 @@ export default function Cart(): JSX.Element {
   };
 
   const handleComprar = () => {
-    // Guardar el carrito en localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
 
-    // Redirigir a la página de facturación
     window.location.href = "/facturacion";
   };
 
