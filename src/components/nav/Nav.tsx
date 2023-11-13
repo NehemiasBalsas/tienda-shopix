@@ -30,17 +30,20 @@ export default function Nav() {
     setSearchVisible(!searchVisible);
   };
 
-  const handleSearch = async () => {
-    try {
-      const response = await fetch(`${apiUrl}?title=${searchTerm}`);
-      const data = await response.json();
-      setSearchResults(data as Product[]);
-    } catch (error) {
-      console.error('Error al buscar productos:', error);
-    }
-  };
+const handleSearch = async () => {
+  try {
+    const response = await fetch(`${apiUrl}?title=${searchTerm}`);
+    const data = await response.json();
 
- 
+    const filteredResults = data.filter((producto: Product) =>
+      producto.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults(filteredResults);
+  } catch (error) {
+    console.error('Error al buscar productos:', error);
+  }
+};
 
   return (
     <div>
