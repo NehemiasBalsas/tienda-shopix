@@ -4,7 +4,7 @@ import { encriptarPasswd } from "@/utils/encrip"
 import { PrismaClient } from "@prisma/client"
 import { sign } from "jsonwebtoken"
 
-export async function POST(req: Request) {
+export default async function POST(req: Request) {
     const Prisma = new PrismaClient();
     const usuario = await req.json()
 

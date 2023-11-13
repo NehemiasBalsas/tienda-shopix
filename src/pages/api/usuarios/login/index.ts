@@ -5,7 +5,7 @@ import { sign } from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: Request) {
+export default async function POST(req: Request) {
     const usuario = await req.json();
 
     if(!usuario.email.match(emailRegex)) return new Response(JSON.stringify({ msg:"Email Incorrecto"}), {status: 400})
