@@ -5,7 +5,6 @@ import Nav from '@/components/nav/Nav';
 import style from '@/styles/detalleproducto.module.css';
 import { CartContext } from '@/context/CartContext';
 
-
 interface Producto {
   id: number;
   title: string;
@@ -60,7 +59,6 @@ const DetalleDelProducto: React.FC = () => {
           className={style.btn}>
             Agregar al carrito
           </button>
-        
         </section>
       </section>
       </>

@@ -86,6 +86,12 @@ export default function Cart(): JSX.Element {
     }
   };
 
+  const handleComprar = () => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    window.location.href = "/facturacion";
+  };
+
   if (cart.products.length === 0) {
     return <p className={Cartcss.cart}>El carrito está vacío.</p>;
   }
@@ -107,8 +113,7 @@ export default function Cart(): JSX.Element {
               </div>
               <div className={Cartcss.ContainerButtons}>
                 <button className={Cartcss.button} onClick={() => handleIncrement(producto.id)}>
-                  <Image src={más} alt='foto no disponible' />
-                </button>
+                  <Image src={más} alt='foto no disponible' /></button>
                 <button className={Cartcss.button} onClick={() => handleDelete(producto.id)}>
                   <Image src={basura} alt='foto no disponible' />
                 </button>
@@ -119,10 +124,9 @@ export default function Cart(): JSX.Element {
       </ul>
       <div className={Cartcss.ContainerComprar}>
         <p className={Cartcss.Total}>Total: ${cart.totalPrice}</p>
-        <Link className={Cartcss.Comprar}
-          href="/facturacion">
+        <button className={Cartcss.Comprar} onClick={handleComprar}>
           Comprar
-          </Link>
+        </button>
       </div>
     </div>
   );

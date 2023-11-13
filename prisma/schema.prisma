@@ -23,7 +23,6 @@ model Usuarios {
   apellido      String?
   email         String          @unique @db.VarChar(255)
   password      String
-  edad          Int
   descripcion   String?
   rol           Rol             @default(LECTOR)
 }

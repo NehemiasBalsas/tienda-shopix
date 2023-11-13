@@ -6,16 +6,12 @@ function FormRegister() {
     const nameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const yearRef = useRef(null);
-  
     async function mandarDatosDeRegistro(evento: FormEvent) {
       evento.preventDefault()
   
       const datosAEnviar = {
         //@ts-ignore
       nombre: nameRef.current?.value, 
-      //@ts-ignore
-      edad: Number(yearRef.current?.value),
       //@ts-ignore
       email: emailRef.current?.value,
       //@ts-ignore
@@ -25,7 +21,7 @@ function FormRegister() {
       console.log(datosAEnviar)
   
   
-      const respuesta = await fetch("http://localhost:3000/api/auth/register", {
+      const respuesta = await fetch("http://localhost:3000/api/usurios/register", {
         method: "POST",
         headers: {
           "Content-Type" : "application/json"
@@ -34,9 +30,10 @@ function FormRegister() {
       });
   
   
-      if(respuesta.status !== 201){
-        const error = await respuesta.json()
-        alert(error.msg)
+      if (!respuesta.ok) {
+        const errorHtml = await respuesta.text();
+        console.error(`Error en la solicitud: ${errorHtml}`);
+        return; 
       }
   
   
@@ -48,7 +45,7 @@ function FormRegister() {
   return (
     <section className={style.container}>
         <h1 className={style.title}>Registrate</h1>
-        <form method='post' className={style.formcontain} onSubmit={async (e) => await mandarDatosDeRegistro(e)}>
+        <form className={style.formcontain} onSubmit={async (e) => await mandarDatosDeRegistro(e)}>
             {/* Form Group */}
             <div className={style.formgroup}>
                 <label htmlFor="fullname">
