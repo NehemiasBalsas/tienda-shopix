@@ -25,8 +25,8 @@ model Usuarios {
   password      String
   descripcion   String?
   rol           Rol             @default(LECTOR)
+  edad          Int?
 }
-
 
 model Facturacion {
   id Int @id @default(autoincrement())
@@ -39,5 +39,5 @@ model Facturacion {
   localidad String
   dni Int
   email String
-  telefono Int
+  telefono BigInt
 }

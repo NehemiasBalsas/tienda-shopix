@@ -1,32 +1,49 @@
 import { emailRegex, passwdRegex } from "@/utils/regex"
 import { log } from "console"
 import { encriptarPasswd } from "@/utils/encrip"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient, Usuarios } from "@prisma/client"
 import { sign } from "jsonwebtoken"
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function POST(req: Request) {
-    const Prisma = new PrismaClient();
-    const usuario = await req.json()
+type usuario = {
+  username: string;
+  email: string;
+  password: string;
+};
 
-    if(Object.values(usuario).includes(null) ){
-        return new Response(JSON.stringify({ msg:"Error! Faltan datos"}), {status: 400})
+type RegisterResponse =
+  | {
+      token: string;
     }
-    if(!usuario.password.match(passwdRegex)) 
-    return new Response(JSON.stringify({ msg:"Contraseña no valida"}), {status: 400})
-    if(!usuario.email.match(emailRegex)) 
-    return new Response("Email Invalido", {status: 400})
+  | {
+      msg: string;
+    };
 
-    const passwdHash = await encriptarPasswd(usuario.password)
+export default async function registerHandler(
+  req: NextApiRequest,
+  res: NextApiResponse<RegisterResponse>
+) {
+    const prisma = new PrismaClient()
+  const usuario: Usuarios = req.body;
 
-    const usuarioAGuardar = { ...usuario, password: passwdHash};
+  if (Object.values(usuario).includes("undefined"))
+    return res.status(400).json({ msg: "Error! Not enough data" });
 
-    const usuarioSubido = await Prisma.usuarios.create({ data: usuarioAGuardar })
+  if (!usuario.email.match(emailRegex))
+    return res.status(400).json({ msg: "Error! Invalid email" });
 
-    if(!usuarioSubido) 
-    return new Response(JSON.stringify({ msg: "no se pudo subir el usuario"}), {status: 500})
+  if (!usuario.password.match(passwdRegex))
+    return res.status(400).json({ msg: "Invalid password" });
 
-    const token = sign(usuarioAGuardar, process.env.TOKEN_SECRET as string)
+  const hash = await encriptarPasswd(usuario.password);
 
-    console.log(passwdHash)
-    return new Response(JSON.stringify({token}), {status: 201})
+  const userAGuardar = { ...usuario, password: hash };
+
+  const userSubido = await prisma.usuarios.create({ data: userAGuardar });
+
+  if (!userSubido) return res.status(500).json({ msg: "Error in database" });
+
+  const token = sign(userAGuardar, process.env.TOKEN_SECRET as string);
+
+  res.status(201).json({ token });
 }

@@ -39,6 +39,8 @@ export default function Nav() {
     setSearchVisible(!searchVisible);
   };
 
+  
+
 const handleSearch = async () => {
   try {
     const response = await fetch(`${apiUrl}?title=${searchTerm}`);

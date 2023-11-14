@@ -1,56 +1,66 @@
-import mercadopago from "mercadopago"
-import type { CreatePreferencePayload, PreferencePayer, PreferenceBackUrl } from 'mercadopago/models/preferences/create-payload.model'
+// Importaciones de MercadoPago y tipos necesarios
+import { MercadoPagoConfig, Preference } from "mercadopago";
+import type {
+  CreatePreferencePayload,
+  PreferencePayer,
+  PreferenceBackUrl,
+} from "mercadopago/models/preferences/create-payload.model";
 
-export default function handler(req: Request, res: Response) {
-  
-  // Here is where we configure our session, setting the access token provided by MP
-  mercadopago.configure({
-    access_token: process.env.MP_ACCESS_TOKEN,
-  })
+// Importaciones de Next.js
+import { NextApiRequest, NextApiResponse } from "next";
 
-  // This is just boilerplate data, but really you'll need to catch the important data that MP asks for below
-  const { producto } = req.body // or any other info needed
+// Controlador para manejar las solicitudes de pago con MercadoPago
+export default function paymentMercadoPagoHandler(
+  req: NextApiRequest,
+  res: NextApiResponse<{ global: string | undefined }>
+) {
+  // Crear una instancia de MercadoPagoConfig con el token de acceso proporcionado
+  const mercadopago = new MercadoPagoConfig({
+    accessToken: process.env.MP_ACCESS_TOKEN as string,
+  });
 
-  // Here we create the "Preference", this is the config for the payment
-  const preference: CreatePreferencePayload = {
-    // This is always true * REQUIRED
+  // Extraer datos del cuerpo de la solicitud (usuario y turno)
+  //@ts-ignore
+  const { facturacion, products } = req.body;
+
+  // Configuración de las opciones de la preferencia de pago
+  const preferenceOptions: CreatePreferencePayload | any = {
     binary_mode: true,
-    // The data of the item that the user has to pay for * REQUIRED
     items: [
       {
-        title: `${turno.service} - Nombre de la marca`,
-        description: `Descripcion del producto`,
-        picture_url: "url de imagen",
+        title: `${products.title} - Nombre de la marca`,
+        description: `${products.description}`,
+        picture_url: `${products.image}`,
         quantity: 1 as number,
-        currency_id: "currency needed (ARS, USD, etc)",
-        unit_price: turno.price as number
-      }
+        currency_id: "ARS",
+        unit_price: products.price as number,
+      },
     ],
-    // Data of the user * REQUIRED
     payer: {
-      name: user.name as string,
-      surname: user.name.split(" ")[1] ?? "TGB" as string,
-      email: user.email as string
+      name: facturacion.nombre as string,
+      surname: facturacion.nombre.split(" ")[1] ?? ("TGB" as string),
+      email: facturacion.email as string,
     } as PreferencePayer,
-    // When the user finishes the payment, depending of the status of the payment he'll be redirected, you gotta put your custom urls
     back_urls: {
       success: "https://success.com",
       failure: "https://failure.com",
-      pending: "https://pending.com"
+      pending: "https://pending.com",
     } as PreferenceBackUrl,
-    // This is always "approved"
-    auto_return: "approved"
-  }
-      
-  // Here we config the preference, it's like send it to MP and then its API returns a response object.
-  // We just need the id from it, so we set the response to { global: response.body.id }. 
-  // This will send an object literal where we can access the ID for our frontend button
-  mercadopago.preferences.create(preference)
+    auto_return: "approved",
+  };
+
+  // Crear una instancia de la clase Preference de MercadoPago
+  const preference = new Preference(mercadopago);
+
+  // Crear la preferencia de pago con las opciones proporcionadas
+  preference
+    .create(preferenceOptions)
     .then(function (response) {
-      res.status(200).json({global: response.body.id})
+      // Enviar la respuesta con el ID de la preferencia generada
+      res.status(200).json({ global: response.id });
     })
     .catch((error) => {
-      // In an error appears, we'll send the error.
-      res.status(500).json({global: error})
-    })
+      // Enviar una respuesta de error en caso de problemas
+      res.status(500).json({ global: error });
+    });
 }

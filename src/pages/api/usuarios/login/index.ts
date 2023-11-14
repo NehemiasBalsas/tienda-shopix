@@ -1,32 +1,49 @@
+
 import { compare } from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 import { emailRegex, passwdRegex } from "@/utils/regex";
 import { sign } from "jsonwebtoken";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
+type RespuestaLogin =
+  | {
+      token: string;
+      authorized: boolean;
+    }
+  | {
+      msg: string;
+    };
 
-export default async function POST(req: Request) {
-    const usuario = await req.json();
+export default async function backLogin(req: NextApiRequest, res: NextApiResponse<RespuestaLogin>) {
+    const usuario = req.body;
 
-    if(!usuario.email.match(emailRegex)) return new Response(JSON.stringify({ msg:"Email Incorrecto"}), {status: 400})
-    if(!usuario.password.match(passwdRegex)) return new Response(JSON.stringify({ msg:"Contraseña Incorrecto"}), {status: 400})
+    if (!usuario.email.match(emailRegex))
+    return res.status(400).json({ msg: "Email Invalido"})
+    if (!usuario.password.match(passwdRegex))
+    return res.status(400).json({ msg: "Contraseña Invalida"})
 
-    const cuentaEnDb = await prisma.usuarios.findUnique({
+    const usuarioEnDb = await prisma.usuarios.findUnique({
         where: {
             email: usuario.email,
-        },
-    })
+        }
+    });
 
-    if (!cuentaEnDb) return new Response(JSON.stringify({ msg:"Cuenta no existe"}), {status: 403})
+    if (!usuarioEnDb)
+    return res.status(400).json({ msg: "Esta cuenta no existe, registrate"});
 
-    const contrasenaValida = await compare(usuario.password, cuentaEnDb.password)
+    const contraseñaValida = await compare(
+        usuario.password,
+        usuarioEnDb.password
+    );
 
-    console.log(contrasenaValida)
+    if (!contraseñaValida)
+    return res.status(401).json({ msg: "Contraseña incorrecta!" });
 
-    if(!contrasenaValida) return new Response(JSON.stringify({ msg:"Contraseña Incorrecta"}), {status:401})
-    const token = sign(cuentaEnDb, process.env.TOKEN_SECRET as string, {
-        expiresIn: "7d",
-    })
+    const token = sign(usuarioEnDb, process.env.TOKEN_SECRET as string, {
+        expiresIn: "1d",
+    });
 
-    return new Response(JSON.stringify({ token }), { status: 201 })
+    res.status(200).json({token, authorized: true})
+
 }
