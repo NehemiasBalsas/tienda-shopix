@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/context/CartContext.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/context/CartContext.jsx", "src/components/Chat.jsx"],
   "exclude": ["node_modules"]
 }
