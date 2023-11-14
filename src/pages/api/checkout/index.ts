@@ -9,7 +9,7 @@ export default function handler(req: Request, res: Response) {
   })
 
   // This is just boilerplate data, but really you'll need to catch the important data that MP asks for below
-  const { user, turno } = req.body // or any other info needed
+  const { producto } = req.body // or any other info needed
 
   // Here we create the "Preference", this is the config for the payment
   const preference: CreatePreferencePayload = {
