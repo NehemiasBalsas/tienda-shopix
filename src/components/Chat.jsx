@@ -63,14 +63,9 @@ export default function ChatPage() {
             action=""
             className="text-black"
           >
-            <input
-              onChange={(evento) => setUsername(evento.target.value)}
-              className={Chat.usuario}
-              type="text"
-              placeholder="Nombre de usuario"
-            />
+            
 
-            <ul>
+            <ul className={Chat.msg_group}>
               {todosLosMensajes.map((mensaje, index) => (
                 <li key={index} className={Chat.ContainerMensajes}>
                   {mensaje.contenido.match(urlRegex) ? (
@@ -91,19 +86,29 @@ export default function ChatPage() {
                 </li>
               ))}
             </ul>
-
-            <input
-              onChange={(evento) => setMessage(evento.target.value)}
-              value={message}
-              className={Chat.msj}
-              type="text"
-              placeholder="Mensaje"
-            />
-            <input
-              type="submit"
-              className={Chat.enviar}
-              value="Enviar mensaje"
-            />
+  <div className={Chat.inputs_control}>
+    <div className={Chat.input_group}>
+                <input
+                  onChange={(evento) => setUsername(evento.target.value)}
+                  className={Chat.usuario}
+                  type="text"
+                  placeholder="Nombre de usuario"
+                />
+    
+                <input
+                  onChange={(evento) => setMessage(evento.target.value)}
+                  value={message}
+                  className={Chat.msj}
+                  type="text"
+                  placeholder="Mensaje"
+                />
+                </div>
+                <input
+                  type="submit"
+                  className={Chat.enviar}
+                  value="Enviar mensaje"
+                />
+  </div>
           </form>
         )}
       </section>

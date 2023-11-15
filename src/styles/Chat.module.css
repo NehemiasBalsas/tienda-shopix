@@ -11,9 +11,7 @@
     border-bottom: 2px solid white;
 }
 .usuario {
-    margin-top: 2rem;
-    margin-bottom: .7rem;
-    padding: .1rem;
+    padding-left: 8px;
     border: 1px solid black;
     border-radius: 5px;
     color: #000;
@@ -21,19 +19,28 @@
 
 .msj {
     color: #000;
-    margin-top: .7rem;
-    margin-right: 1rem;
-    padding: .1rem;
+    padding-left: 8px;
     border: 1px solid black;
     border-radius: 5px;
+    height: 40px;
+
+}
+.msg_group{
+    max-height: 300px;
+    overflow-y: auto;
+    
 }
 
 .enviar {
     padding: .3rem;
+    width: 100%;
+    height: 50px;
+    margin-top: .8rem;
     background-color: rgb(34, 130, 182);
     color: #fff;
     border-radius: 7px;
 }
+
 
 
 .toggleButton {
@@ -51,7 +58,15 @@
     justify-content: center;
     align-items: center;
 }
+.input_group{
+    display: flex;
+    gap: 1rem;
+}
 
+.input_group input{
+    width: 100%;
+    flex: 1 1 50%;
+}
 .ContainerMensajes {
     list-style-type: none;
     margin: 10px 0;
@@ -67,15 +82,14 @@
 }
 
 .body {
+    padding: 1rem 1rem;
     position: fixed;
-    bottom: 2rem;
-    right: 5rem;
+    bottom: 5rem;
     width: 30rem;
-    height: 15rem;
+    max-width: 100%;
+    height: 30rem;
     background-color: rgba(0, 0, 0, 0.767);
-    padding: 1rem;
     color: #fff;
-    overflow-y: auto;
     z-index: 998;
     display: none;
     border-radius: 10px;
@@ -83,4 +97,11 @@
 
 .showChat {
     display: block;
+}
+
+@media screen and (min-width: 720px){
+    .body {
+        right: 5rem;
+        bottom: 1rem;
+    }
 }
