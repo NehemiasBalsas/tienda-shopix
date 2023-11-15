@@ -64,7 +64,7 @@ function redirigir(){
             </div>
             {/* Fin Form Group */}
 
-            <button type='submit' className={style.btn}>Resgitrar</button>
+            <button type='submit' className={style.btn}>Iniciar Sesion</button>
             <Link href={'/auth/register'}className={style.tengocuenta}>Crear cuenta</Link>
         </form>
     </section>

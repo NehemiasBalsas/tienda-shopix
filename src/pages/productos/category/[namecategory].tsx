@@ -4,6 +4,7 @@ import css from "@/styles/productos.module.css";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BotonCategory from "@/components/BotonCategory";
+import Footer from "@/components/Footer";
 
 interface Product {
   id: number;
@@ -64,6 +65,7 @@ function Category() {
           </article>
         ))}
       </div>
+      <Footer />
     </>
   );
 }

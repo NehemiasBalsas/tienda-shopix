@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Nav from '@/components/nav/Nav';
 import style from '@/styles/detalleproducto.module.css';
 import { CartContext } from '@/context/CartContext';
+import Footer from '@/components/Footer';
 
 interface Producto {
   id: number;
@@ -61,6 +62,7 @@ const DetalleDelProducto: React.FC = () => {
           </button>
         </section>
       </section>
+      <Footer />
       </>
   );
 };

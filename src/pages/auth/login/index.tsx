@@ -1,5 +1,6 @@
 "use client"
 
+import Footer from '@/components/Footer'
 import FormLogin from '@/components/FormLogin'
 import Nav from '@/components/nav/Nav'
 
@@ -12,6 +13,7 @@ function index() {
     <>
     <Nav />
     <FormLogin />
+    <Footer />
     </>
   )
 }

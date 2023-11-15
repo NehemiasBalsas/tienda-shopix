@@ -4,6 +4,7 @@ import React, { FormEvent, useRef, useContext } from "react";
 import { CartContext } from "@/context/CartContext";
 import Cart from "@/components/Cart";
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 function DatosDeFacturacion() {
   const router = useRouter();
@@ -229,6 +230,7 @@ function DatosDeFacturacion() {
             </button>
           </form>
         </div>
+        <Footer />
     </>
     );
   }

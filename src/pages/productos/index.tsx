@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Nav from '@/components/nav/Nav';
 import css from '@/styles/productos.module.css'
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 
 type Product ={
@@ -41,6 +42,7 @@ export default function StorePage({ products }: {products:Product[]}) {
           </article>
         ))}
         </div>
+        <Footer />
     </>
   )
   
