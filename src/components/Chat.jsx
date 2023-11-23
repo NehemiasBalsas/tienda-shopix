@@ -23,7 +23,7 @@ export default function ChatPage() {
   }, []);
 
   function iniciarSockets() {
-    fetch("/api/socket").then(() => {
+    fetch("https://tienda-shopix-utn.vercel.app/api/socket").then(() => {
       socket = io();
 
       socket.on("chat:mensaje", (mensajeNuevo) => {
